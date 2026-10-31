@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c2d">
+  <meta name="description" content="A local-only Meridian clock editor preview. Changes are stored in this browser only.">
+  <title>Meridian · Local editor preview</title>
+  <link rel="icon" type="image/png" href="./assets/clock-editor-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <main class="clock-preview" aria-label="Meridian clock preview">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" focusable="false"><circle cx="20" cy="20" r="16.5"/><path d="M20 9v11l7 4"/><circle cx="20" cy="20" r="1.4"/></svg>
+          </div>
+          <div class="brand-text"><span class="brand-name">Meridian</span><span class="brand-caption">A QUIETER SENSE OF TIME</span></div>
+        </div>
+        <div class="top-date" id="top-date">Saturday, Oct 31</div>
+        <div class="format-pill">12H</div>
+      </header>
+
+      <div class="local-banner">LOCAL ADMIN PREVIEW <span>·</span> NOT LIVE <span>·</span> SAVED ONLY IN THIS BROWSER</div>
+
+      <nav class="preview-nav" aria-label="Decorative clock navigation preview">
+        <span class="nav-item selected"><span class="nav-glyph">◷</span>Clock</span>
+        <span class="nav-item"><span class="nav-glyph">◴</span>Stopwatch</span>
+        <span class="nav-item"><span class="nav-glyph">◴</span>Countdown</span>
+        <span class="nav-item"><span class="nav-glyph">▤</span>Study</span>
+      </nav>
+
+      <section class="intro-block">
+        <p class="eyebrow">YOUR TIME, BEAUTIFULLY KEPT</p>
+        <h1 id="preview-headline">The world, in its own time.</h1>
+        <p id="preview-intro" class="intro-copy">A little more presence in every passing second.</p>
+      </section>
+
+      <section class="feature-card" aria-label="Local clock preview">
+        <div class="dial" id="dial" role="img" aria-label="Analog local clock">
+          <div class="dial-rim"></div>
+          <div class="dial-ticks" id="dial-ticks" aria-hidden="true"></div>
+          <div class="dial-numbers" aria-hidden="true">
+            <span class="number n12">12</span><span class="number n1">1</span><span class="number n2">2</span><span class="number n3">3</span>
+            <span class="number n4">4</span><span class="number n5">5</span><span class="number n6">6</span><span class="number n7">7</span>
+            <span class="number n8">8</span><span class="number n9">9</span><span class="number n10">10</span><span class="number n11">11</span>
+          </div>
+          <span class="hand hour-hand" id="hour-hand"></span>
+          <span class="hand minute-hand" id="minute-hand"></span>
+          <span class="hand second-hand" id="second-hand"></span>
+          <span class="dial-hub"></span>
+        </div>
+        <div class="feature-copy">
+          <div class="local-label"><span class="live-dot"></span><span id="local-label">Local time</span></div>
+          <div class="hero-time" id="hero-time">09:11<span class="seconds">:05 PM</span></div>
+          <div class="hero-date" id="hero-date">Saturday, October 31, 2026</div>
+          <div class="feature-rule"></div>
+          <p id="preview-note" class="feature-note">A familiar face for the moment you’re in. Add the places that matter to keep their hours close, too.</p>
+        </div>
+      </section>
+
+      <section class="world-section">
+        <header class="section-head">
+          <div><h2>World clock</h2><p>Time, wherever your people are.</p></div>
+          <span class="section-marker">LOCAL PREVIEW</span>
+        </header>
+        <div class="world-grid" id="world-grid" aria-live="polite"></div>
+      </section>
+
+      <div class="privacy-strip"><span class="privacy-mark">●</span><span>Local preview only · edits are not sent to the public Meridian clock.</span></div>
+      <footer class="app-footer"><span>Meridian · A little more present</span><span id="footer-zone">Local time zone</span></footer>
+    </main>
+
+    <aside class="editor-panel" aria-labelledby="editor-title">
+      <div class="editor-heading-row">
+        <div class="editor-brand">
+          <img src="./assets/clock-editor-icon.png" alt="Meridian clock icon" width="38" height="38">
+          <span>MERIDIAN · OWNER TOOLS</span>
+        </div>
+        <span class="ui-chip">LOCAL</span>
+      </div>
+      <h2 id="editor-title" class="editor-title">Editor preview</h2>
+      <p class="editor-subtitle">A local workspace for the clock’s text and world-clock places.</p>
+
+      <div class="local-notice" role="note">
+        <strong>Browser-only preview.</strong> Changes save in this browser’s local storage. They do not update the public clock or sync to another browser or device. This is not a password-protected admin system.
+      </div>
+
+      <form id="editor-form" novalidate>
+        <section class="form-section" aria-labelledby="copy-heading">
+          <h3 id="copy-heading" class="section-label">CLOCK PAGE TEXT</h3>
+          <label class="field-label" for="headline-input">Main headline</label>
+          <input id="headline-input" class="text-input" name="headline" maxlength="90" autocomplete="off" required>
+          <label class="field-label" for="intro-input">Short introduction</label>
+          <input id="intro-input" class="text-input" name="intro" maxlength="140" autocomplete="off" required>
+          <label class="field-label" for="note-input">Clock note</label>
+          <textarea id="note-input" class="text-input note-input" name="note" rows="2" maxlength="240" required></textarea>
+        </section>
+
+        <section class="form-section world-editor-section" aria-labelledby="places-heading">
+          <div class="places-heading-row">
+            <h3 id="places-heading" class="section-label">WORLD-CLOCK ITEMS</h3>
+            <span id="places-count" class="places-count">3 PLACES</span>
+          </div>
+          <p class="place-hint">Edit a city name and its IANA time-zone ID.</p>
+          <div id="place-rows" class="place-rows"></div>
+          <button type="button" id="add-place" class="add-place"><span>+</span> Add a place</button>
+        </section>
+
+        <div class="button-row">
+          <button type="button" id="discard-button" class="button button-secondary">Discard draft</button>
+          <button type="submit" id="save-button" class="button button-primary">Save in this browser</button>
+        </div>
+        <div id="save-status" class="save-status" aria-live="polite">Ready · changes stay on this device</div>
+      </form>
+
+      <div class="security-footnote">No sign-in, server, encryption, or public publishing is involved. Don’t store sensitive information here.</div>
+    </aside>
+  </div>
+</body>
+</html>
